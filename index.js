@@ -80,7 +80,7 @@ async function run() {
       const query = { _id: new ObjectId(id) };
       const result = await productsCollection.deleteOne(query);
       res.send(result);
-    });
+    })
 
     //update
 
