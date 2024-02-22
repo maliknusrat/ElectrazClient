@@ -45,20 +45,16 @@ async function run() {
       res.send(result);
     });
       
-    app.get("/addToCart", async (req, res) => {
+    app.get("/addToCart/:email", async (req, res) => {
+      const email = req.params.email;
       const cursor = cartsCollection.find();
-      const result = await cursor.toArray();
+      const allCart = await cursor.toArray();
+      const result = allCart.filter(cart => cart.email == email);
       res.send(result);
     });
     
-    app.get("/product/:id", async (req, res) => {
-        const id = req.params.id;
-        const query = { _id: new ObjectId(id) };
-        const result = await productsCollection.findOne(query);
-        console.log(id,query,result);
-        res.send(result);
-    });
     
+
     //create
     app.post("/products", async (req, res) => {
       const productInfo = req.body;
